@@ -23,7 +23,7 @@
                     <th><span>Municipio</span></th>
                     <th><span>Cargo</span></th>
                     <th><span>Nombre</span></th>
-                    <th><span>Tipo</span></th>
+                    <!--<th><span>Tipo</span></th>-->
                     <th><span>Foto</span></th>
                     <th><span>User</span></th>
                     <th></th>
@@ -36,7 +36,7 @@
                     <td>{{personal.municipio}}</td>
                     <td>{{personal.cargo}}</td>
                     <td>{{personal.nombre}}</td>
-                    <td>{{personal.tipo}}</td>
+                    <!--<td>{{personal.tipo}}</td>-->
                     <td>
                         <a ng-if="personal.foto" ng-click="vm.openFile(personal.fotoContentType, personal.foto)">
                             <img data-ng-src="{{'data:' + personal.fotoContentType + ';base64,' + personal.foto}}" style="max-height: 30px;" alt="personal image"/>

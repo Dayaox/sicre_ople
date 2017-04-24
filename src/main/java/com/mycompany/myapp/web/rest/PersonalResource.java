@@ -31,7 +31,7 @@ public class PersonalResource {
     private final Logger log = LoggerFactory.getLogger(PersonalResource.class);
 
     private static final String ENTITY_NAME = "personal";
-        
+
     private final PersonalRepository personalRepository;
 
     private final PersonalMapper personalMapper;
@@ -96,7 +96,7 @@ public class PersonalResource {
     @Timed
     public List<PersonalDTO> getAllPersonals() {
         log.debug("REST request to get all Personals");
-        List<Personal> personals = personalRepository.findAll();
+        List<Personal> personals = personalRepository.findByUserIsCurrentUser();
         return personalMapper.personalsToPersonalDTOs(personals);
     }
 
