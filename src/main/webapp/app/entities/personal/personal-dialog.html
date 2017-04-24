@@ -1,0 +1,96 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myPersonalLabel">Create or edit a Personal</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.personal.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.personal.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_distrito">Distrito</label>
+            <input type="text" class="form-control" name="distrito" id="field_distrito"
+                    ng-model="vm.personal.distrito"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_municipio">Municipio</label>
+            <input type="text" class="form-control" name="municipio" id="field_municipio"
+                    ng-model="vm.personal.municipio"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_cargo">Cargo</label>
+            <input type="text" class="form-control" name="cargo" id="field_cargo"
+                    ng-model="vm.personal.cargo"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_nombre">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="field_nombre"
+                    ng-model="vm.personal.nombre"
+                    ng-maxlength="50"/>
+            <div ng-show="editForm.nombre.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.nombre.$error.maxlength">
+                    This field cannot be longer than 50 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_tipo">Tipo</label>
+            <input type="number" class="form-control" name="tipo" id="field_tipo"
+                    ng-model="vm.personal.tipo"
+                    />
+        </div>
+        <div class="form-group" ngf-drop ngf-change="vm.setFoto($file, vm.personal)" ngf-pattern="'image/*'">
+            <label class="control-label" for="field_foto">Foto</label>
+            <div>
+                <img data-ng-src="{{'data:' + vm.personal.fotoContentType + ';base64,' + vm.personal.foto}}" style="max-height: 100px;" ng-if="vm.personal.foto" alt="personal image"/>
+                <div ng-if="vm.personal.foto" class="help-block clearfix">
+                    <span class="pull-left">{{vm.personal.fotoContentType}}, {{vm.byteSize(vm.personal.foto)}}</span>
+                    <button type="button" ng-click="vm.personal.foto=null;vm.personal.fotoContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="button" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setFoto($file, vm.personal)" accept="image/*">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="foto" id="field_foto"
+                    ng-model="vm.personal.foto"
+                    maxbytes="1000000"/>
+            <input type="hidden" class="form-control" name="fotoContentType" id="field_fotoContentType"
+                    ng-model="vm.personal.fotoContentType" />
+            <div ng-show="editForm.foto.$invalid">
+                <p class="help-block"
+                   ng-show="editForm.foto.$error.maxbytes">
+                    This field cannot be more than 1000000.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" ng-model="vm.personal.userId" ng-options="user.id as user.login for user in vm.users"            >
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

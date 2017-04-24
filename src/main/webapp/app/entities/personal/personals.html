@@ -1,0 +1,75 @@
+<div>
+    <h2>Personals</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="personal.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Personal
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Distrito</span></th>
+                    <th><span>Municipio</span></th>
+                    <th><span>Cargo</span></th>
+                    <th><span>Nombre</span></th>
+                    <th><span>Tipo</span></th>
+                    <th><span>Foto</span></th>
+                    <th><span>User</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="personal in vm.personals track by personal.id">
+                    <td><a ui-sref="personal-detail({id:personal.id})">{{personal.id}}</a></td>
+                    <td>{{personal.distrito}}</td>
+                    <td>{{personal.municipio}}</td>
+                    <td>{{personal.cargo}}</td>
+                    <td>{{personal.nombre}}</td>
+                    <td>{{personal.tipo}}</td>
+                    <td>
+                        <a ng-if="personal.foto" ng-click="vm.openFile(personal.fotoContentType, personal.foto)">
+                            <img data-ng-src="{{'data:' + personal.fotoContentType + ';base64,' + personal.foto}}" style="max-height: 30px;" alt="personal image"/>
+                        </a>
+                        <span ng-if="personal.foto">{{personal.fotoContentType}}, {{vm.byteSize(personal.foto)}}</span>
+                    </td>
+                    <td>
+                        {{personal.userLogin}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="personal-detail({id:personal.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="personal.edit({id:personal.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="personal.delete({id:personal.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

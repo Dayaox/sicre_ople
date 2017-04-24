@@ -1,0 +1,53 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "personal"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "distrito",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "municipio",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cargo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nombre",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "50"
+        },
+        {
+            "fieldName": "tipo",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "foto",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image",
+            "fieldValidateRules": [
+                "maxbytes"
+            ],
+            "fieldValidateRulesMaxbytes": "1000000"
+        }
+    ],
+    "changelogDate": "20170424103619",
+    "dto": "mapstruct",
+    "service": "no",
+    "entityTableName": "personal",
+    "pagination": "no"
+}

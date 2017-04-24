@@ -1,0 +1,14 @@
+version: '2'
+services:
+    sicre_ople-app:
+        image: sicre_ople
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mysql://sicre_ople-mysql:3306/sicre_ople?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    sicre_ople-mysql:
+        extends:
+            file: mysql.yml
+            service: sicre_ople-mysql
